@@ -1,4 +1,4 @@
-<!-- <p>
+<p>
     {{userDetails.student_id}}
 </p>
 <p>
@@ -11,7 +11,27 @@
     {{userDetails.Roll_no}}
 </p>
 <input type="button" (click)="onLogout()" value="Logout" /> -->
+<!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+<script>
+//   $("#b").click(function(){
+//   	console.log('in button');
+//     $.ajax({
+//     type: "GET",
+//     url: "localhost:3000/api/file/EXP5.pdf",
+//     dataType: "pdf"
+// }).done(function (res) {
+//     // Your `success` code
+// }).fail(function (jqXHR, textStatus, errorThrown) {
+//     alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+// });
+//   });
 
+</script>
+<!-- <div ng-app="myApp" ng-controller="formCtrl">
+<button id="b" ng-click="reset()">Check</button>
+</div> -->
 <div class="container-fluid">
     <nav class="navbar navbar-expand-sm navbar-light">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -36,6 +56,7 @@
                 </li>
             </ul>
             <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onLogout()">Logout</button>
+            <button id="b" (click)="check()">Check</button>
         </div>
     </nav>
     <div class="row">
@@ -46,34 +67,51 @@
                 </div>
                 <div class="container" id="info">
                     <h3>id - {{userDetails.student_id}}</h3>
-                    <h3>Pratik Deepak Naik</h3>
+                    <h3>Name-{{userDetails.Name}}</h3>
                     <h3>Address - Kalwa</h3>
                     <h3>Year - {{userDetails.Year}}</h3>
-                    <h3>Division - A</h3>
+                    <h3>Division - {{userDetails.Division}}</h3>
                     <h3>Batch - {{userDetails.Batch}}</h3>
                     <h3>Roll No - {{userDetails.Roll_no}}</h3>
-                    <h3>Email - pratik@gmail.com</h3>
+                    <h3>Email - {{userDetails.email}}</h3>
                     <h3>Previous Login</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="container">
-                <div class="jumbotron" id="coding">
-                    <h2>Coding Area</h2>
-                </div>
-                <div class="jumbotron" id="output">
-                    <h3>Output Terminal</h3>
-                </div>
-                <div class="text=center">
-                    <button type="submit" class="btn-primary btn-lg">Submit</button>
-                </div>
+                <form #codeoutput="ngForm" (ngSubmit)="codesubmit(codeoutput)">
+                Language: <input id="lang" type="text" >
+                <!-- Language: <input id="lang" type="text" name="language" #language="ngModel" [(ngModel)]="model.language"> -->
+                <br>
+                <br>
+                Code: <textarea id="code" rows="4" cols="50" ></textarea>
+                <br>
+                <br>
+                Input: <textarea id="input" rows="4" cols="50" ></textarea>
+                <br>
+                <br>
+                <input type="submit" value="Sign In">
+            </form>
+            <br>
+            Output: <textarea id="output" rows="4" cols="50"></textarea>
+            <br>
+            <br>
+            Error: <textarea id="error" rows="4" cols="50"></textarea>
+            <br>
+            <br>
+            Message: <textarea id="message" rows="2" cols="50"></textarea>
+            <br>
+            <br>
+            Description: <textarea id="description" rows="2" cols="50"></textarea>
+                
             </div>
         </div>
         <div class="col-md-3">
             <h1>Practical Manual</h1>
-            <div>
-                <img src="assets/images/document-retention-policy-sample.jpg" alt="Sample Document" id="doc">
+            <div id='manual'>
+                <!-- <img src="assets/images/document-retention-policy-sample.jpg" alt="Sample Document" id="doc"> -->
+                
             </div>
             <div class="buttons">
                 <button type="button" class="btn btn-lg btn-primary">Prev</button>

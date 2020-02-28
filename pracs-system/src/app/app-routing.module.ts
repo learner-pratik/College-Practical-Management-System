@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'admin/teacher', component: TeacherComponent},
   { path: 'admin/timetable', component: TimetableComponent},
   { path: 'studentprofile', component: StudentprofileComponent,canActivate:[AuthGuard] },
-  { path: 'teacherprofile', component: TeacherprofileComponent },
+  { path: 'teacherprofile', component: TeacherprofileComponent,canActivate:[AuthGuard] },
   { path: 'teacherprofile/class_incharge', component: ClassInchargeComponent},
   { path: 'teacherprofile/subject_incharge', component: SubInchargeComponent},
   { path: 'teacherprofile/hod', component: HodComponent}
