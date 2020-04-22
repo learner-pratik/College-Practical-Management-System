@@ -166,4 +166,8 @@ export class UserService {
     // console.log(params)
     return this.http.post(environment.apiBaseUrl+'/admintimetable',{data});
   }
+  setrole(data){
+    console.log(data,'sending')
+    return this.http.post(environment.apiBaseUrl+'/role',{data});
+  }
 }

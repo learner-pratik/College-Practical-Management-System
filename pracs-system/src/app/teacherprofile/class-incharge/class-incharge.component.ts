@@ -48,6 +48,7 @@ export class ClassInchargeComponent implements OnInit {
 
   selectclass(sel){
     this.batches=[0,0,0,0]
+    this.allsubject=[]
     console.log(sel.target.value)
     var sel=sel.target.value
     var temp=[]

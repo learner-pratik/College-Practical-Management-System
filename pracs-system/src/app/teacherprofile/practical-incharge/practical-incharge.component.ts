@@ -15,6 +15,7 @@ export class PracticalInchargeComponent implements OnInit {
   students;
   batches=[];
   teacher=this.userService.getData('role');
+  flag=0
   constructor(private userService: UserService,private http: HttpClient) { }
 
   ngOnInit() {
@@ -83,5 +84,21 @@ getstudents(data){
 save(j){
   this.userService.setData('student',this.students[j])
 }
+
+slide(){
+  // $(document).ready(function(){
+    // $("#btn").click(function(){
+      if(this.flag==1){
+      $("#d").slideUp();
+      this.flag=0
+      return
+      }
+      if(this.flag==0){
+      $("#d").slideDown();
+      this.flag=1
+      return
+      }
+    // });
+  }
 
 }

@@ -146,13 +146,13 @@ module.exports.subject = (req, res, next) => {
 
 module.exports.role = (req, res, next) => {
     var role=new rol();
-    console.log(req.body)
-    role.teacher_id=req.body.teacher_id;
-    role.Role=req.body.Role;
-    role.Year=req.body.Year;
-    role.Batch=req.body.Batch;
-    role.Division=req.body.Division;
-    role.Subject_Name=req.body.Subject_Name;
+    console.log(req.body.data.Role)
+    role.teacher_id=req.body.data.teacher_id;
+    role.Role=req.body.data.Role;
+    role.Year=req.body.data.Year;
+    role.Batch=req.body.data.Batch;
+    role.Division=req.body.data.Division;
+    role.Subject_Name=req.body.data.Subject_Name;
     role.save((err, doc) => {
         if (!err)
             res.send(doc);

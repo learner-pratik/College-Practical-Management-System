@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../shared/user.service';
 import { environment } from './../../../environments/environment'
 
+declare var require: any
+var $ = require('jquery');
+
 @Component({
   selector: 'app-teacher',
   templateUrl: './teacher.component.html',
@@ -20,7 +23,7 @@ export class TeacherComponent implements OnInit {
   
   uploadedFiles: Array < File > ;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private userService:UserService) {
       
   }
 
@@ -37,6 +40,26 @@ upload() {
         .subscribe((response) => {
             console.log('response received is ', response);
         })
+}
+
+submit(){
+  var data={
+    'teacher_id':$('#teacher_id').val(),
+    'Role':$('#Role').val(),
+    'Year':$('#Year').val(),
+    'Batch':$('#Batch').val(),
+    'Division':$('#Division').val(),
+    'Subject_Name':$('#Subject_Name').val()
+  }
+  console.log(data);
+  this.userService.setrole(data).subscribe(
+      res=>{
+        console.log(res)
+      },
+      err=>{
+        console.log(err)
+      }
+    )
 }
 
 }
