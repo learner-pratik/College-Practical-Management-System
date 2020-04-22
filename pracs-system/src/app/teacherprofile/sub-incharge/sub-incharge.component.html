@@ -1,1 +1,13 @@
+<div>
 <p>sub-incharge works!</p>
+<select (change)='selectclass($event)'>
+    <option>None</option>
+    <option *ngFor='let i of class' value={{i}} >{{i}}</option>
+</select>
+<div *ngFor='let i of exp;index as j'>
+    <button id='btn' (click)='slide(j)'>{{i}}</button> 
+    <div id='{{j}}' style="display: none;">
+    <div *ngFor='let k of complete[j];index as x' >batch{{x+1}} {{ k }}/{{batches[x]}}</div>
+    </div>
+</div>
+</div>

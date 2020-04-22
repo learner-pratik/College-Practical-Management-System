@@ -1,4 +1,4 @@
-<p>
+<!-- <p>
     {{userDetails.student_id}}
 </p>
 <p>
@@ -33,7 +33,7 @@
 <button id="b" ng-click="reset()">Check</button>
 </div> -->
 <div class="container-fluid">
-    <nav class="navbar navbar-expand-sm navbar-light">
+    <!-- <nav class="navbar navbar-expand-sm navbar-light">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,14 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onLogout()">Logout</button>
             <button id="b" (click)="check()">Check</button>
         </div>
-    </nav>
+    </nav> -->
+    <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onLogout()">Logout</button>
+    <select (change)='select($event)' *ngIf='subject.length>1'>
+        <option>None</option>
+        <option *ngFor='let i of subject' value={{i}} >{{i}}</option>
+    </select>
+    <br>
+    <p *ngIf='subject.length==1'> {{ subject[0] }} </p>
     <div class="row">
         <div class="col-md-3">
             <div class="container">
@@ -78,37 +85,54 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4" >
             <div class="container">
-                <form #codeoutput="ngForm" (ngSubmit)="codesubmit(codeoutput)">
-                Language: <input id="lang" type="text" >
+                <form #codeoutput="ngForm" (ngSubmit)="codesubmit(codeoutput)" *ngIf='experiments!=0'>
+                Language: <input id="lang" type="text" name="language" #language="ngModel" [(ngModel)]="model.language">
                 <!-- Language: <input id="lang" type="text" name="language" #language="ngModel" [(ngModel)]="model.language"> -->
                 <br>
                 <br>
-                Code: <textarea id="code" rows="4" cols="50" ></textarea>
+                Code: <textarea id="code" rows="4" cols="50" name="code" #code="ngModel" [(ngModel)]="model.code"></textarea>
                 <br>
                 <br>
-                Input: <textarea id="input" rows="4" cols="50" ></textarea>
+                Input: <textarea id="input" rows="4" cols="50" name="input" #input="ngModel" [(ngModel)]="model.input"></textarea>
                 <br>
                 <br>
-                <input type="submit" value="Sign In">
-            </form>
+                <input type="submit" value="Run">
+            
             <br>
-            Output: <textarea id="output" rows="4" cols="50"></textarea>
-            <br>
-            <br>
-            Error: <textarea id="error" rows="4" cols="50"></textarea>
+            Output: <textarea id="output" rows="4" cols="50" name="output" #output="ngModel" [(ngModel)]="model.output"></textarea>
             <br>
             <br>
-            Message: <textarea id="message" rows="2" cols="50"></textarea>
+            Error: <textarea id="error" rows="4" cols="50" name="error" #error="ngModel" [(ngModel)]="model.error"></textarea>
             <br>
             <br>
-            Description: <textarea id="description" rows="2" cols="50"></textarea>
-                
+            Message: <textarea id="message" rows="2" cols="50" name="message" #message="ngModel" [(ngModel)]="model.message"></textarea>
+            <br>
+            <br>
+            Description: <textarea id="description" rows="2" cols="50" name="description" #description="ngModel" [(ngModel)]="model.description"></textarea>
+            <br>
+            <br>
+            <!-- Questions:
+            <div *ngFor='let i of questions' name="answer" #answer="ngModel" [(ngModel)]="model.answer">
+                <p>{{i}}</p>
+                <input type="text">
+            </div> -->
+        </form>
+        <div *ngFor='let i of questions;let ind=index'>
+            <p>{{i}}</p>
+            <input type="text" id='{{ind}}'>
+        </div>
+        <button (click)='submit()'>Submit</button>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5">
             <h1>Practical Manual</h1>
+            <div *ngFor='let i of experiments'>
+            <button (click)='open(i)'>{{i["Exp_Name"]}}</button>
+            <br>
+            <!-- <br> -->
+            </div>
             <div id='manual'>
                 <!-- <img src="assets/images/document-retention-policy-sample.jpg" alt="Sample Document" id="doc"> -->
                 
@@ -117,6 +141,12 @@
                 <button type="button" class="btn btn-lg btn-primary">Prev</button>
                 <button type="button" class="btn btn-lg btn-primary">Next</button>
             </div>
+            {{select_exp}}
+            {{url}}{{expname}}
+            <!-- <iframe *ngIf='select_exp!=0' src="http://docs.google.com/gview?url=https://91a30372.ngrok.io/api/file/EXP5.pdf&embedded=true"
+            style="width:400px; height:500px;" frameborder="0"></iframe> -->
+            <iframe *ngIf='select_exp!=0' [src]="sanitizer.bypassSecurityTrustResourceUrl(url)"
+            style="width:400px; height:500px;" frameborder="0"></iframe>
         </div>
     </div>
     

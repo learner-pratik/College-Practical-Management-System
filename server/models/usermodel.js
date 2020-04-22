@@ -11,6 +11,10 @@ var Student = new mongoose.Schema({
         type:String,
         required:'Class cant be empty'
     },
+    Semester:{
+        type:String,
+        required:'Class cant be empty'
+    },
     Roll_no:{
         type:Number,
         required:'Roll no. cant be empty'
@@ -54,22 +58,22 @@ var Teacher=new mongoose.Schema({
         type:String,
         required:'Student id cant be empty'
     },
-    Role:{
-        type:String,
-        required:'Role cant be empty'
-    },
-    Year:{
-        type:String,
-        required:'Class cant be empty'
-    },
-    Batch:{
-        type:String,
-        required:'Batch cant be empty'
-    },
-    Division:{
-        type:String,
-        required:'Division cant be empty'
-    },
+    // Role:{
+    //     type:String,
+    //     required:'Role cant be empty'
+    // },
+    // Year:{
+    //     type:String,
+    //     required:'Class cant be empty'
+    // },
+    // Batch:{
+    //     type:String,
+    //     required:'Batch cant be empty'
+    // },
+    // Division:{
+    //     type:String,
+    //     required:'Division cant be empty'
+    // },
     Phone_no:{
         type:String,
         required:'Phone_no cant be empty',
@@ -98,6 +102,33 @@ var Teacher=new mongoose.Schema({
     // }
 });
 
+var Role =new mongoose.Schema({
+    teacher_id :{
+        type:String,
+        required:'Year cant be empty'
+    },
+    Role:{
+        type:String,
+        required:'Role cant be empty'
+    },
+    Year:{
+        type:String,
+        required:'Class cant be empty'
+    },
+    Batch:{
+        type:String,
+        required:'Batch cant be empty'
+    },
+    Division:{
+        type:String,
+        required:'Division cant be empty'
+    },
+    Subject_Name :{
+        type:String,
+        required:'Subject name cant be empty'
+    },
+}); 
+
 var Subject =new mongoose.Schema({
     Year :{
         type:String,
@@ -124,7 +155,7 @@ var Experiments =new mongoose.Schema({
     },
     Question :{
         type:[],
-        required:'question cant be empty'
+        // required:'question cant be empty'
     },
 });
 
@@ -239,7 +270,7 @@ var Submission =new mongoose.Schema({
     },
     Output_question :{
         type:[],
-        required:'output cant be empty'
+        required:'output answer cant be empty'
     },
 });
 
@@ -281,3 +312,9 @@ mongoose.model('Student',Student);
 mongoose.model('Teacher',Teacher);
 mongoose.model('Timetable',Timetable);
 mongoose.model('Attendance',Attendance);
+mongoose.model('Subject',Subject);
+mongoose.model('Experiments',Experiments);
+mongoose.model('Grade',Grade);
+mongoose.model('Project',Project);
+mongoose.model('Submission',Submission);
+mongoose.model('Role',Role);

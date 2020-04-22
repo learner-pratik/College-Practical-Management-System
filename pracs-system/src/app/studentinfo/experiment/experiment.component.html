@@ -1,0 +1,23 @@
+<p>experiment works!</p>
+<div>
+    <button *ngFor="let i of exp;index as j" (click)="selectexp(j)">{{i['Exp_Name']}}</button>
+</div>
+<div>{{output}}</div>
+<div *ngFor="let i of experiment;index as j">
+    Question:
+    {{i}}
+    <br>
+    Answer:
+    {{outputquestion[j]}}
+</div>
+<div *ngIf="outputquestion.length!=0">Grading
+    <br>
+    <select (change)='selectgrade($event)'>
+        <option>None</option>
+        <option value="A+">A+</option>
+        <option value="A">A</option>
+        <option value="B+">B+</option>
+        <option value="B">B</option>
+    </select>
+</div>
+

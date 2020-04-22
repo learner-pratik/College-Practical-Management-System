@@ -1,27 +1,5 @@
 <div class="container">
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="router-link-active" >Home <span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/admin/student']">Student </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/admin/teacher']">Teacher </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/admin/timetable']">Timetable </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<!--     
     <div class="container">
         <h1>Timetable</h1>
         <form action="">
@@ -131,7 +109,15 @@
             </table>
         </form>
         <button class="btn-lg" type="submit">Submit</button>
-    </div>
+    </div> -->
+    <input id='Day' placeholder="Day">
+    <input id='Time' placeholder="Time">
+    <input id='Subject_Name' placeholder="Subject_Name">
+    <input id='Lab' placeholder="Lab">
+    <input id='Batch' placeholder="Batch">
+    <input id='Year' placeholder="Year">
+    <input id='Division' placeholder="Division">
+    <button (click)='submit()'>Submit</button>
 </div>
 
 

@@ -19,6 +19,11 @@ const student=mongoose.model('Student');
 const teacher=mongoose.model('Teacher');
 const timetable=mongoose.model('Timetable');
 const attendance=mongoose.model('Attendance');
+const Subject=mongoose.model('Subject');
+const experiment=mongoose.model('Experiments')
+const role=mongoose.model('Role')
+const grade=mongoose.model('Grade')
+const submission=mongoose.model('Submission')
 const _ = require('lodash');
 const date=require("add-subtract-date");
 var multer = require('multer');
@@ -26,203 +31,6 @@ var xlstojson = require("xls-to-json-lc");
 var xlsxtojson = require("xlsx-to-json-lc");
 var XLSX = require('xlsx');
 
-//add student
-let student_register =(req, res) => {
-    console.log(req);
-    var i=0;
-    var len=req.length;
-    for (i=0;i<len;i++)
-    {
-        console.log(req[i].student_id);
-        var stu=new student();
-        stu.student_id=req[i].student_id;
-        stu.Year=req[i].year;
-        stu.Roll_no=req[i].roll_no;
-        stu.Batch=req[i].batch;
-        stu.Division=req[i].division;
-        stu.Phone_no=req[i].phone_no;
-        stu.Name=req[i].name;
-        stu.email=req[i].email;
-        stu.password=req[i].password;
-        // stu.work='student';
-        stu.save((err, doc) => {
-            if (!err)
-            {
-                console.log("saving");
-                // res.send(doc);
-            }
-            else {
-                console.log("any error ",err.code);
-                // if (err.code == 11000)
-                //     res.status(422).send(['Duplicate email adrress found.']);
-                
-            }
-
-        });
-    }
-}
-
-//add teacher
-let teacher_register = (req, res) => {
-    console.log(req);
-    var i=0;
-    var len=req.length;
-    for (i=0;i<len;i++)
-    {
-        var tea=new teacher();
-        tea.teacher_id=req[i].teacher_id;
-        tea.Role=req[i].role;
-        tea.Year=req[i].year;
-        tea.Batch=req[i].batch;
-        tea.Division=req[i].division;
-        tea.Phone_no=req[i].phone_no;
-        tea.Name=req[i].name;
-        tea.email=req[i].email;
-        tea.password=req[i].password;
-        tea.Subject=req[i].subject;
-        // tea.work='teacher';
-        tea.save((err, doc) => {
-            if (!err)
-                console.log("uploading");
-                // res.send(doc);
-            else {
-                console.log("any error");
-                // if (err.code == 11000)
-                //     res.status(422).send(['Duplicate email adrress found.']);
-                
-            }
-
-        });
-    }
-}
-
-module.exports.timetable = (req, res, next) => {
-    var time=new timetable();
-    time.Day=req.body.Day;
-    time.Time=req.body.Time;
-    time.Subject_Name=req.body.Subject_Name;
-    time.Lab=req.body.Lab;
-    time.Batch=req.body.Batch;
-    time.Year=req.body.Year;
-    time.Division=req.body.Division;
-    // start_date=new Date();
-    // start_date=req.body.start_date;
-    // lectures=req.body.lectures;
-    
-    // var i=0;
-    // var j=new Date(start_date);
-    // var xyz="attendance.r";
-    
-    // for(i=0;i<=lectures;i++)
-    // {
-    //     console.log(j.getDate());
-    //     fun.db.collection('students').updateOne({'Year':req.body.Year,'Batch':req.body.Batch,'Division':req.body.Division}, {$push: {"attendance":[j.getDate(),"absent"]} });
-    //     date.add(j,7,"days");
-    // }
-
-    time.save((err, doc) => {
-        if (!err)
-            res.send(doc);
-        else {
-            if (err.code == 11000)
-                res.status(422).send(['Duplicate email adrress found.']);
-            else
-                return next(err);
-        }
-
-    });
-}
-
-
-// Route for file upload
-module.exports.upload = (req, res) =>  {
-    fun.upload(req,res, (err) => {
-        if(err){
-             res.json({error_code:1,err_desc:err});
-             return;
-        }
-        res.json({error_code:0, error_desc: null, file_uploaded: true});
-    });
-}
-
-//excel upload
-
-
-var storage = multer.diskStorage({ //multers disk storage settings
-    destination: function (req, file, cb) {
-        cb(null, './uploads/')
-    },
-    filename: function (req, file, cb) {
-        var datetimestamp = Date.now();
-        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-    }
-});
-
-var uploade = multer({ //multer settings
-                storage: storage,
-                fileFilter : function(req, file, callback) { //file filter
-                    if (['xls', 'xlsx'].indexOf(file.originalname.split('.')[file.originalname.split('.').length-1]) === -1) {
-                        return callback(new Error('Wrong extension type'));
-                    }
-                    callback(null, true);
-                }
-            }).single('file');
-
-module.exports.uploadexcel = (req, res) =>  {
-    console.log('uploading');
-    var exceltojson;
-    uploade(req,res,function(err){
-        if(err){
-             res.json({error_code:1,err_desc:err});
-             return;
-        }
-        /** Multer gives us file info in req.file object */
-        if(!req.file){
-            res.json({error_code:1,err_desc:"No file passed"});
-            return;
-        }
-        /** Check the extension of the incoming file and 
-         *  use the appropriate module
-         */
-        if(req.file.originalname.split('.')[req.file.originalname.split('.').length-1] === 'xlsx'){
-            exceltojson = xlsxtojson;
-        } else {
-            exceltojson = xlstojson;
-        }
-        console.log(req.file.path);
-        var workbook = XLSX.readFile(req.file.path);
-        var sheet_name_list = workbook.SheetNames;
-        console.log(sheet_name_list[0]);
-        try {
-            exceltojson({
-                input: req.file.path,
-                output: null, //since we don't need output.json
-                lowerCaseHeaders:true
-            }, function(err,result){
-                if(err) {
-                    return res.json({error_code:1,err_desc:err, data: null});
-                }
-                if(sheet_name_list=='students')
-                    student_register(result);
-                    // console.log(result); 
-                else
-                    teacher_register(result);
-
-                res.json({error_code:0,err_desc:null, data: result});
-            });
-            var fs = require('fs');
-            try {
-                fs.unlinkSync(req.file.path);
-            } catch(e) {
-                //error deleting the file
-            }
-            // console.log(exceltojson);
-        } catch (e){
-            res.json({error_code:1,err_desc:"Corupted excel file"});
-        }
-    })
-   
-}
 
 // Downloading a single file
 module.exports.download = (req, res) =>  {
@@ -286,32 +94,108 @@ module.exports.authenticate = (req, res, next) => {
 }
 
 //Student login
-module.exports.studentProfile = (req, res, next) =>{
+module.exports.studentProfile = async (req, res, next) =>{
     console.log('in student');
-    student.findOne({ _id: req._id },
-        (err, user) => {
-            if (!user)
-                return res.status(404).json({ status: false, message: 'User record not found.' });
+    // (async () => {
+    // var data=await handler(req._id);
+    // })()
+    // var data;
+    // (async () => {
+    //     console.log("in main function",await handler(req._id))
+    //     data=await handler(req._id)
+    //     console.log("in main function",data);
+    //   })()
+    //   async function handler(id){
+        try {
+            const user = await finduser(req._id);
+            console.log(user);
+            const time = await attended(user)
+            console.log("in handler",user,time);
+            data= _.pick(user,['student_id','Year','Batch','Roll_no','Semester','Division','Name','email']);
+            data['subject_name']=time['Subject_Name'];
+            if(data['subject_name']==0)
+            {
+                const sub = await allsubjects(data['Year'],data['Semester']);
+                console.log('all subjects',sub);
+                var i,arr=[];
+                for(i in sub)
+                {   
+                    // console.log(sub[i])
+                    arr.push(sub[i]['Subject_Name'])
+                }
+                console.log(arr)
+                data['subject_name']=arr;
+            }
             else
-                // console.log(user['Year']);
+            data['subject_name']=[time['Subject_Name']];
+            console.log("final data",data);
+            // return(data);
+          } catch (error) {
+            console.log(error)
+          }
+    // }
+    console.log("in main function",data);
+    return res.status(200).json({ status: true, user : data});
+}
+// async function handler(id){
+//     try {
+//         const user = await finduser(id);
+//         console.log(user);
+//         const time = await attended(user)
+//         console.log("in handler",user,time);
+//         data= _.pick(user,['student_id','Year','Batch','Roll_no','Division','Name','email']);
+//         data['subject_name']=time['Subject_Name'];
+//         console.log("final data",data);
+//         return(data);
+//       } catch (error) {
+//         console.log(error)
+//       }
+// }
+function finduser(id){
+    return new Promise(function(resolve,reject)
+    {
+        student.findOne({ _id: id },
+            (err, user) => {
+                if (!user)
+                    return res.status(404).json({ status: false, message: 'User record not found.' });
+                else
+                {
+                    // data= _.pick(user,['student_id','Year','Batch','Roll_no','Division','Name','email']);
+                    // return res.status(200).json({ status: true, user : data});
+                    resolve(user);
+                }
+            }
+        )
+    });
+}
+function attended(user){
+    return new Promise(function(resolve,reject)
+    {
+    let lect;
                 var id =user['student_id']
                 var y=user['Year'];
                 var d=user['Division'];
                 var b=user['Batch'];
+                console.log('1');
                 timetable.findOne({'Year':y,'Division':d,'Batch':b},
                 (err,res)=>{
                     if (!res)
                         console.log("if");
                     else
+                    {
                         var date_ob = new Date();
+                        // date_ob=date_ob.toISOString()
+                        console.log(date_ob.toISOString());
                         var today=date_ob.getDate();
                         console.log(today);
                         // current hours
                         var hours = date_ob.getHours();
-                        if (hours>12)
-                        hours-=12;
+                        console.log(hours);
+                        // if (hours>12)
+                        // hours-=12;
                         // current minutes
                         var minutes = date_ob.getMinutes();
+
                         var curr=hours*60 +minutes;
 
                         var time =res['Time'];
@@ -353,13 +237,200 @@ module.exports.studentProfile = (req, res, next) =>{
                             {
                                 //absent
                                 console.log('absent');
+                                res['Subject_Name']=0;
                             }
                         console.log(ent,ext,'  ',curr,hours,minutes);
                         console.log(res);
+                        // lect=res['Subject_Name'];
+                        // console.log("in time fun",lect);
+                        resolve(res);
+                    }
+                    });
                 });
-                return res.status(200).json({ status: true, user : _.pick(user,['student_id','Year','Batch','Roll_no']) });
+}
+function allsubjects(y,s)
+{
+    return new Promise(function(resolve,reject)
+    {
+    Subject.find({'Year':y,'Semester':s},
+    (err,res)=>{
+        if(!res)
+        console.log("Subject not found");
+        else
+        {   
+            console.log(res);
+            resolve(res);
         }
-    );
+    });
+});
+}
+
+module.exports.findexp=(req,res,next) =>{
+    sub=req.query.Subject_Name;
+    console.log(sub,'finding experiments');
+    experiment.find({'Subject_Name':sub},(err,exp)=>{
+        if(!exp)
+        console.log('not found')
+        else{
+            data=exp;
+        return res.status(200).json({ status: true, exp : data });
+        }
+    });
+}
+
+module.exports.findrole=(req,res,next) =>{
+    console.log('in server function');
+    t=req.query.t_id;
+    console.log(t,'finding roles');
+    role.find({'teacher_id':t},(err,rol)=>{
+        if(!rol)
+        console.log('not found')
+        else{
+        return res.status(200).json({ status: true, role : rol });
+        }
+    });
+}
+
+module.exports.findstudents=(req,res,next) =>{
+    console.log(req.query)
+    var y =req.query.Year
+    var d =req.query.Division
+    var b =req.query.Batch
+    if (b=='all'){
+        student.find({'Year':y,'Division':d},(err,stu)=>{
+            if(!stu)
+            console.log('not found students')
+            else{
+                // var l=stu.length
+                return res.status(200).json({ status: true, students : stu });
+            }
+        })
+    }
+    else
+    {
+    student.find({'Year':y,'Division':d,'Batch':b},(err,stu)=>{
+        if(!stu)
+        console.log('not found students')
+        else{
+            return res.status(200).json({ status: true, students : stu });
+        }
+    })
+    }
+    // return res.status(200).json({ status: true});
+}
+
+module.exports.findsubmission=(req,res,next) =>{
+    var s=req.query.Subject_Name
+    console.log(s)
+    submission.find({'Subject_Name':s},(err,sub)=>{
+        if(!sub)
+        console.log('not found submission',sub)
+        else
+        return res.status(200).json({ status: true, submission : sub });
+    })
+}
+
+module.exports.outputstudent=(req,res,next) =>{
+    var s=req.query.Subject_Name
+    var e=req.query.Exp_Name
+    var sid=req.query.student_id
+    console.log(s)
+    submission.find({'Subject_Name':s,"Exp_Name":e,"student_id":sid},(err,sub)=>{
+        if(!sub)
+        console.log('not found submission',sub)
+        else
+        return res.status(200).json({ status: true, submission : sub });
+    })
+}
+
+module.exports.findsubject=(req,res,next) =>{
+    var y=req.query.Year
+    console.log(y)
+    Subject.find({'Year':y},(err,sub)=>{
+        if(!sub)
+        console.log('not found submission',sub)
+        else
+        return res.status(200).json({ status: true, subject : sub });
+    })
+}
+
+module.exports.findattendance=(req,res,next) =>{
+    var sid=req.query.student_id;
+    var sub=req.query.Subject_Name;
+    // console.log(sid,sub)
+    attendance.find({'Subject_Name':sub,'student_id':sid},(err,atd)=>{
+        if(!atd)
+        console.log('not found attendance')
+        else{
+            // console.log(atd)
+        return res.status(200).json({status:true,attend:atd})
+        }
+    })
+}
+
+module.exports.assigngrade=(req,res,next) =>{
+    var g=new grade()
+    g.student_id=req.query.student_id;
+    g.Subject_Name=req.query.Subject_Name;
+    g.Time=req.query.time;
+    g.Exp_Name=req.query.exp_name
+    g.grade=req.query.grade
+    g.save()
+    return res.status(200).json({ status: true});
+}
+
+module.exports.submit=(req,res,next) =>{
+    data=req.body.data;
+    console.log("saving");
+    console.log(data);
+    var sub=new submission()
+    sub.Subject_Name=data['Subject']
+    sub.Exp_Name=data['Exp_Name']
+    sub.student_id=data['student_id']
+    sub.Output=data['Output']
+    sub.Output_question=data['Output_question']
+    sub.save((err,res)=>{
+        console.log(err,res)
+    });
+    return res.status(200).json({ status: true});
+}
+
+module.exports.timetable = (req, res, next) => {
+    console.log(req.body.data['Day'])
+    var time=new timetable();
+    time.Day=req.body.data['Day'];
+    time.Time=req.body.data['Time'];
+    time.Subject_Name=req.body.data['Subject_Name'];
+    time.Lab=req.body.data['Lab'];
+    time.Batch=req.body.data['Batch'];
+    time.Year=req.body.data['Year'];
+    time.Division=req.body.data['Division'];
+    // start_date=new Date();
+    // start_date=req.body.start_date;
+    // lectures=req.body.lectures;
+    
+    // var i=0;
+    // var j=new Date(start_date);
+    // var xyz="attendance.r";
+    
+    // for(i=0;i<=lectures;i++)
+    // {
+    //     console.log(j.getDate());
+    //     fun.db.collection('students').updateOne({'Year':req.body.Year,'Batch':req.body.Batch,'Division':req.body.Division}, {$push: {"attendance":[j.getDate(),"absent"]} });
+    //     date.add(j,7,"days");
+    // }
+
+    time.save((err, doc) => {
+        if (!err)
+            res.send(doc);
+        else {
+            if (err.code == 11000)
+                res.status(422).send(['Duplicate email adrress found.']);
+            else
+                return next(err);
+        }
+
+    });
 }
 
 //Teacher Login

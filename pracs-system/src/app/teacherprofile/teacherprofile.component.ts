@@ -17,19 +17,46 @@ export class TeacherprofileComponent implements OnInit {
     this.userService.getteacherProfile().subscribe(
       res => {
         this.userDetails = res['user'];
-        this.roles=this.userDetails.Role.split(',');
+        // module.exports.userDetails=this.userDetails;
+        // this.roles=this.userDetails.Role.split(',');
+        // if (this.roles.length==1)
+        // {
+        //   this.router.navigateByUrl('/teacherprofile/'+this.roles[0]);
+        // }
+        this.userService.role(this.userDetails.teacher_id).subscribe(
+          res=>{
+            var s
+            s=res['role']
+            this.userService.setData('role',s)
+            console.log(res['role'])
+            var a=[]
+            for (var i in res['role'])
+            if(!a.includes(res['role'][i]['Role']))  
+            a.push(res['role'][i]['Role'])
+            this.roles=a
+            // console.log(this.roles,a)
+            if (this.roles.length==1)
+            {
+              this.router.navigateByUrl('/teacherprofile/'+this.roles[0]);
+            }
+          },
+          err=>{console.log(err)}
+        );
+        // this.userService.setData(this.userDetails);
         console.log(this.userDetails.teacher_id);
+        // console.log(this.userService.getData())
       },
       err => { 
         console.log(err);
         
       }
     );
+  
   }
 
   onLogout(){
     this.userService.deleteToken();
     this.router.navigate(['/login']);
   }
-
+ 
 }

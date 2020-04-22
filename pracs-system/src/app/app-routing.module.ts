@@ -12,20 +12,38 @@ import { TimetableComponent } from './admin/timetable/timetable.component';
 import { ClassInchargeComponent } from './teacherprofile/class-incharge/class-incharge.component';
 import { SubInchargeComponent } from './teacherprofile/sub-incharge/sub-incharge.component';
 import { HodComponent } from './teacherprofile/hod/hod.component';
+import { PracticalInchargeComponent } from './teacherprofile/practical-incharge/practical-incharge.component'
+import { StudentinfoComponent } from './studentinfo/studentinfo.component'
+import { ExperimentComponent } from './studentinfo/experiment/experiment.component'
+import { AttendanceComponent } from './studentinfo/attendance/attendance.component'
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'admin/student', component: StudentComponent},
-  { path: 'admin/teacher', component: TeacherComponent},
-  { path: 'admin/timetable', component: TimetableComponent},
+  { path: 'admin/student', component: AdminComponent,
+  children: [{ path: '', component: StudentComponent }]},
+  { path: 'admin/teacher', component: AdminComponent,
+  children: [{ path: '', component: TeacherComponent }]},
+  { path: 'admin/timetable', component: AdminComponent,
+  children: [{ path: '', component: TimetableComponent }]},
+  { path: 'studentinfo', component: StudentinfoComponent},
+  { path: 'studentinfo/experiment', component: StudentinfoComponent,
+    children: [{ path: '', component: ExperimentComponent }]},
+  { path: 'studentinfo/attendance', component: StudentinfoComponent,
+    children: [{ path: '', component: AttendanceComponent }]},
   { path: 'studentprofile', component: StudentprofileComponent,canActivate:[AuthGuard] },
   { path: 'teacherprofile', component: TeacherprofileComponent,canActivate:[AuthGuard] },
-  { path: 'teacherprofile/class_incharge', component: ClassInchargeComponent},
-  { path: 'teacherprofile/subject_incharge', component: SubInchargeComponent},
-  { path: 'teacherprofile/hod', component: HodComponent}
+  { path: 'teacherprofile/class_incharge', component: TeacherprofileComponent,
+    children: [{ path: '', component: ClassInchargeComponent }]
+  },
+  { path: 'teacherprofile/subject_incharge', component: TeacherprofileComponent,
+    children: [{ path: '', component: SubInchargeComponent }]},
+  { path: 'teacherprofile/hod', component: TeacherprofileComponent,
+    children: [{ path: '', component: HodComponent }]},
+  { path: 'teacherprofile/practical_incharge', component: TeacherprofileComponent,
+    children: [{ path: '', component: PracticalInchargeComponent }]}
 ];
 
 @NgModule({
