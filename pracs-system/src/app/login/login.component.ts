@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { UserService } from '.././shared/user.service';
+import { UserService } from '../shared/user.service';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faLaptop } from '@fortawesome/free-solid-svg-icons';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +14,10 @@ import { UserService } from '.././shared/user.service';
   providers: [UserService]
 })
 export class LoginComponent implements OnInit {
+
+  faUser = faUser;
+  faLaptop = faLaptop;
+  faLock = faLock;
 
   constructor(private userService: UserService,private router : Router) { }
 

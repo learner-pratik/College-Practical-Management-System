@@ -28,6 +28,8 @@ import { StudentinfoComponent } from './studentinfo/studentinfo.component';
 import { ExperimentComponent } from './studentinfo/experiment/experiment.component';
 import { AttendanceComponent } from './studentinfo/attendance/attendance.component';
 
+//fonts
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -52,8 +54,8 @@ import { AttendanceComponent } from './studentinfo/attendance/attendance.compone
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

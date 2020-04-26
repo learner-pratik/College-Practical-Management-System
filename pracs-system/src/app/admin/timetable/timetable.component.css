@@ -1,0 +1,13 @@
+.jumbotron {
+    margin-top: 30px;
+    background-color: #11364f;
+    font-weight: bold;
+    color: baddf5;
+}
+.jumbotron .display-3 {
+    font-weight: bold;
+    color: #baddf5;
+}
+.content {
+    padding: 20px;
+}

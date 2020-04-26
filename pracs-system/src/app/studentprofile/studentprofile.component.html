@@ -15,26 +15,27 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
 <script>
-//   $("#b").click(function(){
-//   	console.log('in button');
-//     $.ajax({
-//     type: "GET",
-//     url: "localhost:3000/api/file/EXP5.pdf",
-//     dataType: "pdf"
-// }).done(function (res) {
-//     // Your `success` code
-// }).fail(function (jqXHR, textStatus, errorThrown) {
-//     alert("AJAX call failed: " + textStatus + ", " + errorThrown);
-// });
-//   });
-
-</script>
-<!-- <div ng-app="myApp" ng-controller="formCtrl">
-<button id="b" ng-click="reset()">Check</button>
-</div> -->
-<div class="container-fluid">
-    <!-- <nav class="navbar navbar-expand-sm navbar-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+    //   $("#b").click(function(){
+    //   	console.log('in button');
+    //     $.ajax({
+    //     type: "GET",
+    //     url: "localhost:3000/api/file/EXP5.pdf",
+    //     dataType: "pdf"
+    // }).done(function (res) {
+    //     // Your `success` code
+    // }).fail(function (jqXHR, textStatus, errorThrown) {
+    //     alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+    // });
+    //   });
+    
+    </script>
+    <!-- <div ng-app="myApp" ng-controller="formCtrl">
+    <button id="b" ng-click="reset()">Check</button>
+    </div> -->
+<div class="container-fullwidth main-page">
+    <nav class="navbar navbar-expand-sm">
+        <a class="navbar-brand" href="#">DMCE</a>
+        <a class="navbar-brand" href="#">{{userDetails.student_id}}</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,10 +43,10 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" [routerLink]="['/studentprofile/']">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" (click)='info()' [routerLink]="['/studentinfo/']">Info</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -55,24 +56,16 @@
                     </div>
                 </li>
             </ul>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onLogout()">Logout</button>
-            <button id="b" (click)="check()">Check</button>
+            <button class="btn my-2 my-sm-0" type="button" (click)="onLogout()">Logout</button>
         </div>
-    </nav> -->
-    <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="onLogout()">Logout</button>
-    <select (change)='select($event)' *ngIf='subject.length>1'>
-        <option>None</option>
-        <option *ngFor='let i of subject' value={{i}} >{{i}}</option>
-    </select>
-    <br>
-    <p *ngIf='subject.length==1'> {{ subject[0] }} </p>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="container">
-                <div class="container">
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="container text-container user-img">
                     <img src="assets/images/user_img.png" id="icon" alt="User Icon" />
                 </div>
-                <div class="container" id="info">
+                <div class="container details">
                     <h3>id - {{userDetails.student_id}}</h3>
                     <h3>Name-{{userDetails.Name}}</h3>
                     <h3>Address - Kalwa</h3>
@@ -84,70 +77,75 @@
                     <h3>Previous Login</h3>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4" >
-            <div class="container">
-                <form #codeoutput="ngForm" (ngSubmit)="codesubmit(codeoutput)" *ngIf='experiments!=0'>
-                Language: <input id="lang" type="text" name="language" #language="ngModel" [(ngModel)]="model.language">
-                <!-- Language: <input id="lang" type="text" name="language" #language="ngModel" [(ngModel)]="model.language"> -->
-                <br>
-                <br>
-                Code: <textarea id="code" rows="4" cols="50" name="code" #code="ngModel" [(ngModel)]="model.code"></textarea>
-                <br>
-                <br>
-                Input: <textarea id="input" rows="4" cols="50" name="input" #input="ngModel" [(ngModel)]="model.input"></textarea>
-                <br>
-                <br>
-                <input type="submit" value="Run">
-            
-            <br>
-            Output: <textarea id="output" rows="4" cols="50" name="output" #output="ngModel" [(ngModel)]="model.output"></textarea>
-            <br>
-            <br>
-            Error: <textarea id="error" rows="4" cols="50" name="error" #error="ngModel" [(ngModel)]="model.error"></textarea>
-            <br>
-            <br>
-            Message: <textarea id="message" rows="2" cols="50" name="message" #message="ngModel" [(ngModel)]="model.message"></textarea>
-            <br>
-            <br>
-            Description: <textarea id="description" rows="2" cols="50" name="description" #description="ngModel" [(ngModel)]="model.description"></textarea>
-            <br>
-            <br>
-            <!-- Questions:
-            <div *ngFor='let i of questions' name="answer" #answer="ngModel" [(ngModel)]="model.answer">
-                <p>{{i}}</p>
-                <input type="text">
-            </div> -->
-        </form>
-        <div *ngFor='let i of questions;let ind=index'>
-            <p>{{i}}</p>
-            <input type="text" id='{{ind}}'>
-        </div>
-        <button (click)='submit()'>Submit</button>
+            <div class="col-md-5">
+                <div class="container sub-select">
+                    <select (change)='select($event)' *ngIf='subject.length>1'>
+                        <option disabled selected value="">Select Subject</option>
+                        <option *ngFor='let i of subject' value={{i}} >{{i}}</option>
+                    </select>
+                    <p *ngIf='subject.length==1'> {{ subject[0] }} </p>
+                </div>
+                <form action="">
+                    <div class="form-group">
+                        <select class="form-control" name="language" #language="ngModel" [(ngModel)]="model.language" id='lang'>
+                            <option disabled selected value="">Select Language</option>
+                            <option *ngFor='let i of languages;index as j' value={{j}} >{{i}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Code</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" style="background-color: #15162e; color: aliceblue;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Input</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="background-color: #15162e; color: aliceblue;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Output</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="background-color: #15162e; color: aliceblue;"></textarea>
+                    </div>
+                    <input type="submit" value="Run" class="btn btn-primary">
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Error</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="background-color: #15162e; color: aliceblue;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Message</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="background-color: #15162e; color: aliceblue;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="background-color: #15162e; color: aliceblue;"></textarea>
+                    </div>
+                </form>
+                <div class="container questions">
+                    <h1>Questions</h1>
+                    <div *ngFor='let i of questions;let ind=index'>
+                        <h5>{{i}}</h5>
+                        <!-- <input style="background-color: #15162e; color: aliceblue;" type="text" id='{{ind}}'> -->
+                        <textarea cols="80" rows="2" style="background-color: #15162e; color: aliceblue;" id='{{ind}}'></textarea>
+                    </div>
+                    <button class="btn btn-lg btn-primary" (click)='submit()' *ngIf='experiments!=0' style="margin-top: 15px;">Submit</button>
+                </div>
             </div>
-        </div>
-        <div class="col-md-5">
-            <h1>Practical Manual</h1>
-            <div *ngFor='let i of experiments'>
-            <button (click)='open(i)'>{{i["Exp_Name"]}}</button>
-            <br>
-            <!-- <br> -->
+            <div class="col-md-4">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-5" id="pracs">Practical Manual</h1>
+                        <hr class="my-4">
+                        <div class="lead" *ngFor='let i of experiments'>
+                            <button class=" btn btn-lg btn-dark" (click)='open(i)'>{{i["Exp_Name"]}}</button>
+                            <br>
+                        </div>
+                        <br><br>
+                        <div id="manual"></div>
+                        <!-- <p class="lead">{{select_exp}}</p>
+                        <p class="lead">{{url}}{{expname}}</p> -->
+                        <iframe class="lead" *ngIf='select_exp!=0' [src]="sanitizer.bypassSecurityTrustResourceUrl(url)"
+                        style="width:450px; height:500px;" frameborder="0"></iframe>
+                    </div>
+                </div>
             </div>
-            <div id='manual'>
-                <!-- <img src="assets/images/document-retention-policy-sample.jpg" alt="Sample Document" id="doc"> -->
-                
-            </div>
-            <div class="buttons">
-                <button type="button" class="btn btn-lg btn-primary">Prev</button>
-                <button type="button" class="btn btn-lg btn-primary">Next</button>
-            </div>
-            {{select_exp}}
-            {{url}}{{expname}}
-            <!-- <iframe *ngIf='select_exp!=0' src="http://docs.google.com/gview?url=https://91a30372.ngrok.io/api/file/EXP5.pdf&embedded=true"
-            style="width:400px; height:500px;" frameborder="0"></iframe> -->
-            <iframe *ngIf='select_exp!=0' [src]="sanitizer.bypassSecurityTrustResourceUrl(url)"
-            style="width:400px; height:500px;" frameborder="0"></iframe>
         </div>
     </div>
-    
 </div>

@@ -1,26 +1,19 @@
+<div class="jumbotron text-center">
+    <h1 class="display-3">Upload Professors Details</h1>
+</div>
 <div class="container">
-    
-    <div class="container">
-        <div>
-            <h3>Upload teacher details</h3>
-        </div>
-        <div class="custom-file">
-            <!-- <form action="/api/upload" method="post" enctype="multipart/form-data">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-            </form> -->
-            <input name="file" (change)="fileChange($event)"  type="file"  >
-            <!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-        </div>
-        <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span>
+    <div class="custom-file">
+        <input name="file" (change)="fileChange($event)"  type="file"  >
     </div>
-
+    <button class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</button>
+</div>
+<div class="container">
     <input id='teacher_id' placeholder="teacher_id">
     <input id='Role' placeholder="Role">
     <input id='Subject_Name' placeholder="Subject_Name">
     <input id='Batch' placeholder="Batch">
     <input id='Year' placeholder="Year">
     <input id='Division' placeholder="Division">
-    <button (click)='submit()'>Submit</button>
-
+    <button class="btn btn-lg btn-dark" (click)='submit()'>Submit</button>
 </div>
 

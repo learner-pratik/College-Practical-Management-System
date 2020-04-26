@@ -1,0 +1,24 @@
+.main-page{
+    background-color: #aaabb8;
+    max-width: 100%;
+    min-height: 100%;
+}
+.navbar-expand-sm{
+    background-color: #15162e;
+}
+.navbar-expand-sm .navbar-brand,
+.navbar-expand-sm .nav-item .nav-link {
+    color: white;
+}
+.navbar-expand-sm .btn {
+    background-color: #15162e;
+    color: #2e9cca;
+    border: 2px solid #2e9cca;
+    font-size: large;
+    font-weight: 600;
+}
+.navbar-expand-sm .btn:hover {
+    background-color: #2e9cca;
+    color: #15162e;
+    font-size: large;
+}

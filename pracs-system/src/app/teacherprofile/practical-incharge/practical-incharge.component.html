@@ -1,26 +1,50 @@
-<div class="container">
-    <button (click)="slide()">Upload Experiments</button>
-    <div class="container" id="d" style="display:None">
-        <div>
-            <h3>Upload student manual</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="container text-container user-img">
+                <img src="assets/images/user_img.png" id="icon" alt="User Icon" />
+            </div>
+            <div class="container details">
+                <h4>Professor-ID:2017FHCO037</h4>
+                <h4>Name:Pratik Naik</h4>
+                <h4>Address:Kalwa</h4>
+                <h4>Incharge for - </h4>
+                <h4>  Year:3</h4>
+                <h4>  Division:A</h4>
+                <h4>  Batch:3</h4>
+                <h4>Email:pratik@gmail.com</h4>
+                <h4>Previous-Login:12-30</h4>
+            </div>
         </div>
-        <div class="custom-file">
-            <!-- <form #upload="ngForm" (ngSubmit)="upload.valid && onSubmit(upload)"
-                id        =  "uploadForm"
-                enctype   =  "multipart/form-data"
-            >
-                <input type="file" name="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                <input type="submit" value="Upload" name="submit">
-            </form>
-            <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-            <input name="file" (change)="fileChange($event)"  type="file"  >
-            <!-- <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span> -->
+        <div class="col-md-9">
+            <div class="container work-page">
+                <button class="btn btn-lg upload-btn" (click)="slide()">Upload Experiments</button>
+                <div class="container" id="d" style="display:None">
+                    <div>
+                        <h3>Upload student manual</h3>
+                    </div>
+                    <div class="custom-file">
+                        <!-- <form #upload="ngForm" (ngSubmit)="upload.valid && onSubmit(upload)"
+                            id        =  "uploadForm"
+                            enctype   =  "multipart/form-data"
+                        >
+                            <input type="file" name="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                            <input type="submit" value="Upload" name="submit">
+                        </form>
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
+                        <input name="file" (change)="fileChange($event)"  type="file"  >
+                        <!-- <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span> -->
+                    </div>
+                    <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span>
+                </div>
+                <div class="upload-option">
+                    <select (change)='selectbatch($event)'>
+                        <option>None</option>
+                        <option *ngFor='let i of batches' value={{i}} >{{i}}</option>
+                    </select>
+                </div>
+                <div  *ngFor="let i of students;index as j">hello <button (click)='save(j)' [routerLink]="['/studentinfo/']">{{i['Name']}}</button></div>
+            </div>
         </div>
-        <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span>
     </div>
-    <select (change)='selectbatch($event)'>
-        <option>None</option>
-        <option *ngFor='let i of batches' value={{i}} >{{i}}</option>
-    </select>
-    <div  *ngFor="let i of students;index as j">hello <button (click)='save(j)' [routerLink]="['/studentinfo/']">{{i['Name']}}</button></div>
-</div>
+    </div>

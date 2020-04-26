@@ -1,23 +1,48 @@
-<p>experiment works!</p>
-<div>
-    <button *ngFor="let i of exp;index as j" (click)="selectexp(j)">{{i['Exp_Name']}}</button>
+<div class="container work-details">
+    <div class="container">
+        <button type="button" class="btn btn-lg btn-primary"
+        *ngFor="let i of sublist" (click)="selectsub(i)">
+            {{i}}
+        </button>
+    </div>
+    <div class="container">
+        <button type="button" class="btn btn-lg btn-primary" 
+        *ngFor="let i of exp;index as j" (click)="selectexp(j)">
+            {{i['Exp_Name']}}
+        </button>
+    </div>
+    <div class="container" *ngIf="output!=-101">
+        <div>{{output}}</div>
+        <div class="container" *ngFor="let i of experiment;index as j">
+            Question:
+            {{i}}
+            <br>
+            Answer:
+            {{outputquestion[j]}}
+        </div>
+        <div class="table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of experiment;index as j">
+                    <td>{{i}}</td>
+                    <td>{{outputquestion[j]}}</td>
+                </tr>
+            </tbody>
+        </div>
+        <div class="container" *ngIf="outputquestion.length!=0">Grading
+            <br>
+            <select (change)='selectgrade($event)'>
+                <option>None</option>
+                <option value="A+">A+</option>
+                <option value="A">A</option>
+                <option value="B+">B+</option>
+                <option value="B">B</option>
+            </select>
+        </div>
+    </div>
 </div>
-<div>{{output}}</div>
-<div *ngFor="let i of experiment;index as j">
-    Question:
-    {{i}}
-    <br>
-    Answer:
-    {{outputquestion[j]}}
-</div>
-<div *ngIf="outputquestion.length!=0">Grading
-    <br>
-    <select (change)='selectgrade($event)'>
-        <option>None</option>
-        <option value="A+">A+</option>
-        <option value="A">A</option>
-        <option value="B+">B+</option>
-        <option value="B">B</option>
-    </select>
-</div>
-

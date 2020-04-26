@@ -21,6 +21,8 @@ export class StudentprofileComponent implements OnInit {
   questions;
   out;
   answer=[];
+  languages=['C', 'Cpp', 'Cpp14', 'Java', 'Python', 'Python3', 'Php'];
+  code=[50,52,54,62,70,71,68]
   
   // length;
   experiments;
@@ -54,6 +56,11 @@ export class StudentprofileComponent implements OnInit {
   onLogout(){
     this.userService.deleteToken();
     this.router.navigate(['/login']);
+  }
+
+  info(){
+    this.userService.setData('student',this.userDetails)
+    this.userService.setData('role','student')
   }
 
   check(){
@@ -138,8 +145,10 @@ export class StudentprofileComponent implements OnInit {
     var code ='';
     var my_input='';
     var gfg_compiler_api_endpoint = "https://api.judge0.com/submissions/";
-    var languages = ['C', 'Cpp', 'Cpp14', 'Java', 'Python', 'Python3', 'Scala', 'Php', 'Perl', 'Csharp'];
+    // this.languages
     lang=$("#lang").val();
+    lang=this.code[lang]
+    console.log(lang)
     // alert(lang);
     code=$("#code").val();
     my_input=$("#input").val();

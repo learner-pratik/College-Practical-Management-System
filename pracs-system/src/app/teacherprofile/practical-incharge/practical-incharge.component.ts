@@ -6,6 +6,9 @@ import { environment } from 'src/environments/environment';
 // import { TeacherprofileComponent } from '../teacherprofile.component'
 // let student=require('../teacherprofile.component/userDetails');
 
+var $ = require('jquery');
+declare var require: any
+
 @Component({
   selector: 'app-practical-incharge',
   templateUrl: './practical-incharge.component.html',

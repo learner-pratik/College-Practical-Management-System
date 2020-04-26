@@ -1,33 +1,57 @@
-<p>studentinfo works!</p>
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" [routerLink]="['/studentinfo/'+'experiment']" routerLinkActive="router-link-active" >Experiment <span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" [routerLink]="['/studentinfo/'+'attendance']" routerLinkActive="router-link-active" >Attendance <span class="sr-only"></span></a>
-            </li>
-        </ul>
+<div class="container-fullwidth main-page">
+    <nav class="navbar navbar-expand-sm">
+        <a class="navbar-brand" href="#">DMCE</a>
+        <a class="navbar-brand" href="#">{{userDetails.teacher_id}}</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/studentinfo/']">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/studentinfo/'+'experiment']" routerLinkActive="router-link-active" >Experiment <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/studentinfo/'+'attendance']" routerLinkActive="router-link-active" >Attendance <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="#">Action 1</a>
+                        <a class="dropdown-item" href="#">Action 2</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn my-2 my-sm-0" type="button" (click)="onLogout()">Logout</button>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="container text-container user-img">
+                    <img src="assets/images/user_img.png" id="icon" alt="User Icon" />
+                </div>
+                <div class="container details">
+                    <h4>Professor-ID:2017FHCO037</h4>
+                    <h4>Name:{{ student.Name }}</h4>
+                    <h4>Address:Kalwa</h4>
+                    <h4>Incharge for - </h4>
+                    <h4>Year:{{ student.Year }}</h4>
+                    <h4>Division:{{ student.Division }}</h4>
+                    <h4>Batch:{{ student.Batch }}</h4>
+                    <h4>Roll No:{{ student.Roll_no }}</h4>
+                    <h4>Phone No:{{ student.Phone_no }}</h4>
+                    <h4>Email:{{ student.email }}</h4>
+                    <h4>Semester:{{ student.Semester }}</h4>
+                    <h4>Previous-Login:12-30</h4>
+                </div>
+            </div>
+            <div class="col-md-9 work-page">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
     </div>
-</nav>
-
-<div>
-{{ student.Name }}
-<br>
-{{ student.Roll_no }}<br>
-{{ student.Year }}<br>
-{{ student.Division }}<br>
-{{ student.Batch }}<br>
-{{ student.Phone_no }}<br>
-{{ student.email }}<br>
-{{ student.Semester }}<br>
-</div>
-<div>
-<router-outlet></router-outlet>
 </div>

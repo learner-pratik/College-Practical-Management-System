@@ -1,34 +1,65 @@
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-      <!-- Tabs Titles -->
-  
-      <!-- Icon -->
-      <div class="fadeIn first">
-      <img src="assets/images/user_img.png" id="icon" alt="User Icon" />
-      </div>
-  
-      <!-- Login Form -->
-      <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
-      <input type="text" id="username" class="fadeIn second" name="username" #username="ngModel" [(ngModel)]="model.username" placeholder="Username" required
-      [ngClass]="{'invalid-textbox' :signInForm.submitted && !username.valid }">
-    <!-- <div *ngIf="signInForm.submitted && email.errors?.pattern">
-      <label class="validation-message">Invalid email address.</label>
-    </div> -->
-    <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" placeholder="Password" required minlength="4"
-      [ngClass]="{'invalid-textbox' :signInForm.submitted && !password.valid }">
-    <div *ngIf="signInForm.submitted && password.errors?.minlength">
-      <label class="validation-message">Minimum 4 characters.</label>
-    </div>
-    <input type="submit" value="Sign In">
-  </form>
-  <div class="alert" *ngIf="serverErrorMessages">
-      {{serverErrorMessages}}
-    </div>
-  
-      <!-- Signup account for new user -->
-      <div id="formFooter">
-      <a class="underlineHover" routerLink="/signup">New Account?Signup</a>
-      </div>
-  
-  </div>
-</div>
+<div class="w3layouts-main1"> 
+	<div class="bg-layer1">
+		<h1>DMCE PRACS SYSTEM</h1>
+		<div class="header-main1">
+			<div class="main-icon1">
+				<fa-icon [icon]="faLaptop"></fa-icon>
+			</div>
+			<div class="header-left-bottom1">
+				<form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
+					<div class="icon1">
+						<fa-icon [icon]="faUser"></fa-icon>
+						<input type="text" placeholder="Username" required=""
+						id="username" name="username" #username="ngModel" [(ngModel)]="model.username"
+						[ngClass]="{'invalid-textbox' :signInForm.submitted && !username.valid }"/>
+					</div>
+					<div class="icon1">
+						<fa-icon [icon]="faLock"></fa-icon>
+						<input class="passwdclass" type="password" placeholder="Password" required minlength="4"
+						name="password" #password="ngModel" [(ngModel)]="model.password"
+						[ngClass]="{'invalid-textbox' :signInForm.submitted && !password.valid }"/>
+					</div>
+					<div class="login-check">
+						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Keep me logged in</label>
+					</div>
+					<div class="bottom">
+						<button class="btn" type="submit">Log In</button>
+					</div>
+					<div class="links">
+						<p><a href="#">Forgot Password?</a></p>
+						<p class="right"><a routerLink="/signup">New User? Register</a></p>
+						<div class="clear"></div>
+					</div>
+				</form>
+				<div class="alert" *ngIf="serverErrorMessages">
+					{{serverErrorMessages}}
+				</div>	
+			</div>
+			<!-- <div class="social">
+				<ul>
+					<li>or login using : </li>
+					<li><a href="#" class="facebook"><span class="fa fa-facebook"></span></a></li>
+					<li><a href="#" class="twitter"><span class="fa fa-twitter"></span></a></li>
+					<li><a href="#" class="google"><span class="fa fa-google-plus"></span></a></li>
+				</ul>
+			</div> -->
+		</div>
+		
+		<!-- copyright -->
+		<!-- <div class="copyright">
+			<p>© 2019 Slide Login Form . All rights reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a></p>
+		</div> -->
+		<!-- //copyright --> 
+	</div>
+</div>	
+<!-- //main -->
+
+<script>
+  addEventListener("load", function () {
+      setTimeout(hideURLbar, 0);
+  }, false);
+
+  function hideURLbar() {
+      window.scrollTo(0, 1);
+  }
+</script>

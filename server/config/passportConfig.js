@@ -15,8 +15,10 @@ passport.use(
                     (err, user) => {
                         if (err)
                             return done(err);
-                        else if (!user)
+                        else if (!user){
+                            console.log("email bhai bhai");
                             return done(null, false, { message: 'Email is not registered' });
+                        }
                         else if (!user.verifyPassword(password))
                             return done(null, false, { message: 'Wrong password.' });
                         else

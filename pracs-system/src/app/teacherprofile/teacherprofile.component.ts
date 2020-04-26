@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/user.service';
 import { Router } from "@angular/router";
 
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-teacherprofile',
   templateUrl: './teacherprofile.component.html',
@@ -9,6 +11,8 @@ import { Router } from "@angular/router";
 })
 export class TeacherprofileComponent implements OnInit {
 
+  faUserCircle = faUserCircle;
+  
   userDetails;
   roles;
   constructor(private userService: UserService, private router: Router) { }

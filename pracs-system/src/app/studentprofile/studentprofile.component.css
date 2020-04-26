@@ -1,52 +1,86 @@
-nav{
-    background-color: #05386b;
-    color: #edf5e1;
-    width: 100%;
+.main-page{
+    background-color: #aaabb8;
+    max-width: 100%;
+    /* max-height: 100%; */
+    overflow: hidden;
+    height: 100vh;
 }
-.col-md-5{
-    background-color:  #5cdb95;
-    max-height: 100%;
+.row {
+    overflow: hidden;
+    height: auto;
 }
-.col-md-3{
-    background-color: #5cdb95;
-    padding-top: 25px;
+.navbar-expand-sm{
+    background-color: #15162e;
 }
-.row{
-    height: 100%;
+.navbar-expand-sm .navbar-brand,
+.navbar-expand-sm .nav-item .nav-link {
+    color: white;
 }
-#icon{
-    width: 70%;
-    height: 70%;
-    margin-left: 25px;
+.navbar-expand-sm .btn {
+    background-color: #15162e;
+    color: #2e9cca;
+    border: 2px solid #2e9cca;
+    font-size: large;
+    font-weight: 600;
 }
-#doc{
-    width: 100%;
-    height: 500px; 
+.navbar-expand-sm .btn:hover {
+    background-color: #2e9cca;
+    color: #15162e;
+    font-size: large;
 }
-#info{
-    margin-top: 25px;
-}
-.container-fluid{
+.col-md-3 {
+    background-color: #25274d;
     min-height: 100%;
     overflow: hidden;
+    /* position: absolute; */
 }
-.col-md-3, .col-md-5{
-    margin-bottom: -9999px;
-    padding-bottom: 9999px;
+img {
+    width: 80%;
+    height: 80%;
+    margin-left: 25px;
 }
-#coding{
-    min-height: 350px;
-    margin-top: 25px;
-    background-color: #000033;
-    color: #8600b3;
+.col-md-3 .details {
+    color: white;
 }
-#output{
-    min-height: 150px;
+.col-md-5 {
+    height: 700px;
+    overflow-y: scroll;
+}
+.col-md-5::-webkit-scrollbar {
+    display: none;
+}
+.col-md-5 .sub-select {
+    margin: 20px;
+}
+.col-md-5 .sub-select select {
+    font-size: 20px;
+    background-color: #25254d;
+    color: #2e9cca;
+    padding: 5px;
+}
+.col-md-5 .sub-select select option {
+    color: #2e9cca;
+}
+.col-md-5 .questions {
+    /* padding: 15px; */
+}
+.col-md-4 {
+    background-color: #2e9cca;
+    padding: 1em;
+    height: 700px;
+    overflow: scroll;
+}
+.col-md-4::-webkit-scrollbar {
+    display: none;
+}
+.col-md-4 .sub-select {
     margin-top: 15px;
-    background-color: #000000;
-    color: #ffffff;
 }
-.buttons{
-    margin-top: 30px;
-    margin-left: 95px;
+.col-md-4 .jumbotron {
+    min-width: 100%;
+    background-color: #29648a;
+    color: #aaabb8;
+}
+.col-md-4 .jumbotron #pracs {
+    margin-top: 10px;
 }

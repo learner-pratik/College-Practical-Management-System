@@ -1,21 +1,9 @@
+<div class="jumbotron text-center">
+    <h1 class="display-3">Upload Student Details</h1>
+</div>
 <div class="container">
-    
-    <div class="container">
-        <div>
-            <h3>Upload student details</h3>
-        </div>
-        <div class="custom-file">
-            <!-- <form #upload="ngForm" (ngSubmit)="upload.valid && onSubmit(upload)"
-                id        =  "uploadForm"
-                enctype   =  "multipart/form-data"
-            >
-                <input type="file" name="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                <input type="submit" value="Upload" name="submit">
-            </form>
-            <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-            <input name="file" (change)="fileChange($event)"  type="file"  >
-            <!-- <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span> -->
-        </div>
-        <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span>
+    <div class="custom-file">
+        <input name="file" (change)="fileChange($event)"  type="file"  >
     </div>
+    <button class="btn btn-lg btn-primary input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</button>
 </div>

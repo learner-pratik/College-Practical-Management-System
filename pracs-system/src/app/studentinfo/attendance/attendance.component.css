@@ -1,0 +1,14 @@
+.work-details {
+    padding: 1em;
+}
+.table {
+    margin-top: 20px;
+    background-color: #29648a;
+    color: #25274d;
+    border-collapse: separate;
+    border-spacing: 150px 0;
+    font-size: large;
+}
+.btn {
+    margin-left: 15px;
+}

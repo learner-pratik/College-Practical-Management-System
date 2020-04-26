@@ -108,7 +108,7 @@ module.exports.studentProfile = async (req, res, next) =>{
     //   async function handler(id){
         try {
             const user = await finduser(req._id);
-            console.log(user);
+            console.log(user, "lets do this yoyoyoyo");
             const time = await attended(user)
             console.log("in handler",user,time);
             data= _.pick(user,['student_id','Year','Batch','Roll_no','Semester','Division','Name','email']);
@@ -188,6 +188,30 @@ function attended(user){
                         console.log(date_ob.toISOString());
                         var today=date_ob.getDate();
                         console.log(today);
+                        var day=date_ob.getDay();
+                        console.log(day)
+                        if(day==7){
+                            day='Sunday'
+                        }
+                        else if(day==1){
+                            day='Monday'
+                        }
+                        else if(day==2){
+                            day='Tuesday'
+                        }
+                        else if(day==3){
+                            day='Wednesday'
+                        }
+                        else if(day==4){
+                            day='Thrusday'
+                        }
+                        else if(day==5){
+                            day='Friday'
+                        }
+                        else if(day==6){
+                            day='Saturday'
+                        }
+                        if(res['Day']==day){
                         // current hours
                         var hours = date_ob.getHours();
                         console.log(hours);
@@ -241,6 +265,11 @@ function attended(user){
                             }
                         console.log(ent,ext,'  ',curr,hours,minutes);
                         console.log(res);
+                        }
+                        else{
+                            console.log('absent',day,res['Day']);
+                            res['Subject_Name']=0;
+                        }
                         // lect=res['Subject_Name'];
                         // console.log("in time fun",lect);
                         resolve(res);

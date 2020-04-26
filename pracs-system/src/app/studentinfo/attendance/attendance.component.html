@@ -1,2 +1,26 @@
-<p>attendance works!</p>
-<div *ngFor="let i of attendance">{{i['Day']}},{{i['Date']}}</div>
+<div class="container work-details">
+    <div>
+        <button type="button" class="btn btn-lg btn-primary" 
+        *ngFor="let i of sublist" (click)="selectsub(i)">
+            {{i}}
+        </button>
+    </div>
+    <div class="table">
+        <thead>
+            <tr>
+                <th>Sr.No</th>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of attendance">
+                <td>{{i}}</td>
+                <td>{{i['Day']}}</td>
+                <td>{{i['Date']}}</td>
+                <td>Time</td>
+            </tr>
+        </tbody>
+    </div>
+</div>
