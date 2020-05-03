@@ -1,24 +1,61 @@
-.col-md-3 {
+.work-page {
+    padding : 15px;
+}
+.upload-btn {
+    background-color: #aaabb8;
+    color: #25274d;
+    border: 2px solid #25274d;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+.upload-btn:hover {
     background-color: #25274d;
-    min-height: 100%;
+    color: #aaabb8;
 }
-img {
-    width: 80%;
-    height: 80%;
-    margin-left: 25px;
+.jumbotron {
+    background-color: #2964ba;
+    width: 450px;
 }
-.col-md-3 .details {
-    color: white;
+.jumbotron .display-5,
+.jumbotron .exps h1 {
+    color: #aaabb8;
 }
-.col-md-9 .work-page {
-    padding: 1em;   
+.jumbotron input {
+    background-color: #aaabb8;
+    color: #25274d;
+    border: 1px solid black;
+    margin-bottom: 10px;
 }
-.col-md-9 .upload-btn {
-    background-color: #2e9cca;
-    color: #2964ba;
-    float: left;
-}.col-md-9 .upload-option {
-    float: left;
-    height:30px;
-    line-height:30px;
+.jumbotron .lead .btn {
+    background-color: #25274d;
+    color: aliceblue;
 }
+.upload-option {
+    margin: 20px;
+}
+.upload-option select {
+    font-size: 20px;
+    background-color: #aaabb8;
+    color: #25274d;
+    border: 2px solid #25274d;
+    padding: 5px;
+}
+.stud-list {
+    margin: 15px;
+    background-color: #15162e;
+    padding: 15px;
+    width: 520px;
+}
+.stud-list .btn {
+    background-color: #388cc4;
+    color: aliceblue;
+    font-size: large;
+    width: 440px;
+    margin: 1em;
+}
+.stud-list .btn:hover {
+    background-color: #25274d;
+    color: #2e9cca;
+    border: 2px solid #2e9cca;
+}
+

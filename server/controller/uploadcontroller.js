@@ -146,7 +146,13 @@ module.exports.subject = (req, res, next) => {
 
 module.exports.role = (req, res, next) => {
     var role=new rol();
+    console.log("hey buddy")
     console.log(req.body.data.Role)
+    console.log(req.body.data.teacher_id)
+    console.log(req.body.data.Year)
+    console.log(req.body.data.Division)
+    console.log(req.body.data.Batch)
+    console.log(req.body.data.Subject_Name)
     role.teacher_id=req.body.data.teacher_id;
     role.Role=req.body.data.Role;
     role.Year=req.body.data.Year;
@@ -162,7 +168,6 @@ module.exports.role = (req, res, next) => {
             else
                 return next(err);
         }
-
     });
 }
 

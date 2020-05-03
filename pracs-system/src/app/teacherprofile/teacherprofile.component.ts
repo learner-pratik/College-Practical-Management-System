@@ -21,6 +21,8 @@ export class TeacherprofileComponent implements OnInit {
     this.userService.getteacherProfile().subscribe(
       res => {
         this.userDetails = res['user'];
+        console.log("hello world");
+        console.log(this.userDetails);
         // module.exports.userDetails=this.userDetails;
         // this.roles=this.userDetails.Role.split(',');
         // if (this.roles.length==1)
@@ -38,7 +40,7 @@ export class TeacherprofileComponent implements OnInit {
             if(!a.includes(res['role'][i]['Role']))  
             a.push(res['role'][i]['Role'])
             this.roles=a
-            // console.log(this.roles,a)
+            console.log(this.roles,a)
             if (this.roles.length==1)
             {
               this.router.navigateByUrl('/teacherprofile/'+this.roles[0]);

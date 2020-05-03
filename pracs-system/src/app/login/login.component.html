@@ -8,13 +8,13 @@
 			<div class="header-left-bottom1">
 				<form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
 					<div class="icon1">
-						<fa-icon [icon]="faUser"></fa-icon>
-						<input type="text" placeholder="Username" required=""
+						<!-- <fa-icon [icon]="faUser"></fa-icon> -->
+						<input class="userclass" type="text" placeholder="UserID" required="" style="border: 1px solid white;"
 						id="username" name="username" #username="ngModel" [(ngModel)]="model.username"
 						[ngClass]="{'invalid-textbox' :signInForm.submitted && !username.valid }"/>
 					</div>
 					<div class="icon1">
-						<fa-icon [icon]="faLock"></fa-icon>
+						<!-- <fa-icon [icon]="faLock"></fa-icon> -->
 						<input class="passwdclass" type="password" placeholder="Password" required minlength="4"
 						name="password" #password="ngModel" [(ngModel)]="model.password"
 						[ngClass]="{'invalid-textbox' :signInForm.submitted && !password.valid }"/>

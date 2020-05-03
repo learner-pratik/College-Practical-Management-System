@@ -37,5 +37,8 @@ router.post('/admintimetable', ctrlUser.timetable);
 
 module.exports = router;
 
+router.post('/uploadexp', ctrlUser.exp);
+router.post('/getgrade', ctrlUser.getgrade);
+
 
 

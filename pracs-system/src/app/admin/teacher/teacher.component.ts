@@ -40,6 +40,7 @@ upload() {
         .subscribe((response) => {
             console.log('response received is ', response);
         })
+    alert("professor database uploaded");
 }
 
 submit(){
@@ -60,6 +61,7 @@ submit(){
         console.log(err)
       }
     )
+  alert("professor role added");
 }
 
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
+declare var require: any
+var $ = require('jquery');
 
 @Component({
   selector: 'app-experiment',
@@ -18,6 +20,7 @@ export class ExperimentComponent implements OnInit {
   gs
   gsid
   role
+  exp_grade
   constructor(private userService: UserService) { }
 
   ngOnInit() {
@@ -95,13 +98,32 @@ export class ExperimentComponent implements OnInit {
         console.log(err)
       }
     )
+    this.grade();
   }
 
-  selectgrade(g){
-    var grade=g.target.value
+  assign(g){
+    var grade=$('#grade').val();
+    console.log(grade);
     this.userService.assigngrade(this.gsid,this.gs,'time',this.ge,grade).subscribe(
       res=>{
         console.log('Assigned')
+      },
+      err=>{
+        console.log(err)
+      }
+    )
+  }
+
+  grade(){
+    var data={'Exp_Name':this.ge,'Subject_Name':this.gs,'student_id':this.gsid}
+    this.userService.getgrade(data).subscribe(
+      res=>{
+        console.log(res['grade'][0]['grade'])
+        this.exp_grade=res['grade'][0]['grade']
+        if (this.exp_grade=='A ')
+        this.exp_grade='A+'
+        if (this.exp_grade=='B ')
+        this.exp_grade='B+'
       },
       err=>{
         console.log(err)

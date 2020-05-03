@@ -1,24 +1,18 @@
-.col-md-3 {
-    background-color: #25274d;
-    min-height: 100%;
+.upload-option {
+    margin: 20px;
 }
-img {
-    width: 80%;
-    height: 80%;
-    margin-left: 25px;
+.upload-option select {
+    font-size: 20px;
+    background-color: #aaabb8;
+    color: #25274d;
+    border: 2px solid #25274d;
+    padding: 5px;
 }
-.col-md-3 .details {
-    color: white;
-}
-.col-md-9 .work-page {
-    padding: 1em;   
-}
-.col-md-9 .upload-btn {
+.exp-details {
     background-color: #2e9cca;
-    color: #2964ba;
-    float: left;
-}.col-md-9 .upload-option {
-    float: left;
-    height:30px;
-    line-height:30px;
+    padding: 15px;
+}
+.exp-details .btn {
+    background-color: #29648a;
+    color: aliceblue;
 }

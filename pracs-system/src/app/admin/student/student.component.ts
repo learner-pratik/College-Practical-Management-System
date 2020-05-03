@@ -46,6 +46,7 @@ upload() {
         .subscribe((response) => {
             console.log('response received is ', response);
         })
+    alert("student data uploaded");
 }
 
 }

@@ -35,6 +35,7 @@ export class TimetableComponent implements OnInit {
         console.log(err)
       }
     )
+    alert("timetable added");
   }
 
 }

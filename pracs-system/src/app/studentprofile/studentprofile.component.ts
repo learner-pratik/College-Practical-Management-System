@@ -97,7 +97,7 @@ export class StudentprofileComponent implements OnInit {
     console.log(i['Question'])
     this.select_exp=i
     this.expname=this.select_exp['Exp_Name']
-    this.url='http://docs.google.com/gview?url=https://91a30372.ngrok.io/api/file/'+this.expname+'.pdf&embedded=true'
+    this.url='http://docs.google.com/gview?url=http://96d487a4.ngrok.io/api/file/'+this.expname+'.pdf&embedded=true'
     this.questions=i['Question'];
   }
 
@@ -126,6 +126,7 @@ export class StudentprofileComponent implements OnInit {
       }
     );
     console.log(data);
+    alert("Output submitted");
   }
 
   model={

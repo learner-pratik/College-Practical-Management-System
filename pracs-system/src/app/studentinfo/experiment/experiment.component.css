@@ -11,5 +11,42 @@
 }
 .btn {
     margin-left: 15px;
-
+}
+.subs .btn {
+    background-color: #aaabb8;
+    color: #25274d;
+    border: 1px solid #25274d;
+    font-weight: 600;
+}
+.subs .btn:hover {
+    background-color: #25274d;
+    color: #aaabb8;
+}
+.exps {
+    margin-top: 10px;
+}
+.exps .btn {
+    background-color: #aaabb8;
+    color: #25274d;
+    border: 1px solid #25274d;
+    font-weight: 600;
+}
+.exps .btn:hover {
+    background-color: #25274d;
+    color: #aaabb8;
+}
+.output {
+    margin-top: 15px;
+}
+.grades select {
+    font-size: 20px;
+    background-color: #aaabb8;
+    color: #25274d;
+    border: 2px solid #25274d;
+    padding: 5px;
+}
+.grades .btn {
+    background-color: #25274d;
+    color: aliceblue;
+    /* height: 40px; */
 }

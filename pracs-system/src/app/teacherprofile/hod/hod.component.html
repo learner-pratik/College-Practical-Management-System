@@ -1,41 +1,27 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="container text-container user-img">
-                <img src="assets/images/user_img.png" id="icon" alt="User Icon" />
-            </div>
-            <div class="container details">
-                <h4>Professor-ID:2017FHCO037</h4>
-                <h4>Name:Pratik Naik</h4>
-                <h4>Address:Kalwa</h4>
-                <h4>Incharge for - </h4>
-                <h4> Computer Department</h4>
-                <h4>Email:pratik@gmail.com</h4>
-                <h4>Previous-Login:12-30</h4>
-            </div>
+<div class="container work-page">
+    <div class="container selections">
+        <div class="upload-option">
+            <select (change)='selectclass($event)'>
+                <option disabled selected value="">Select class</option>
+                <option *ngFor='let i of class' value={{i}} >{{i}}</option>
+            </select>
         </div>
-        <div class="col-md-9">
-            <div class="container work-page">
-                <div class="upload-option">
-                    <select (change)='selectclass($event)'>
-                        <option>None</option>
-                        <option *ngFor='let i of class' value={{i}} >{{i}}</option>
-                    </select>
-                </div>
-                <div class="upload-option">
-                    <select (change)='selectsubject($event)'>
-                        <option value='-1'>None</option>
-                        <option *ngFor='let i of allsubject' value={{i}} >{{i}}</option>
-                    </select>
-                </div>
-                <div *ngFor='let i of exp;index as j'>
-                    <button id='btn' (click)='slide(j)'>{{i}}</button> 
-                    <div id='{{j}}' style="display: none;">
-                    <div *ngFor='let k of complete[j];index as x' >batch{{x+1}} {{ k }}/{{batches[x]}}</div>
-                    </div>
-                </div>            
-            </div>
+        <div class="upload-option">
+            <select (change)='selectsubject($event)'>
+                <option disabled selected value="">Select subject</option>
+                <option *ngFor='let i of allsubject' value={{i}} >{{i}}</option>
+            </select>
         </div>
     </div>
+    <div class="container exp-details">
+        <div *ngFor='let i of exp;index as j'>
+            <button style="margin-bottom: 10px; margin-left: 12px;" class="btn btn-lg" id='btn' (click)='slide(j)'>{{i}}</button> 
+            <div id='{{j}}' style="display: none;">
+            <div class="container">
+                <h2 *ngFor='let k of complete[j];index as x' >batch{{x+1}} {{ k }}/{{batches[x]}}</h2>
+            </div>
+            </div>
+        </div> 
+    </div>           
 </div>
     

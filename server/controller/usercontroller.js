@@ -177,42 +177,75 @@ function attended(user){
                 var d=user['Division'];
                 var b=user['Batch'];
                 console.log('1');
-                timetable.findOne({'Year':y,'Division':d,'Batch':b},
+                var date_ob = new Date();
+                // date_ob=date_ob.toISOString()
+                console.log(date_ob.toISOString());
+                var today=date_ob.getDate();
+                today = today.toString();
+                today+='/'+(1+date_ob.getMonth()).toString();
+                today+='/'+date_ob.getFullYear().toString();
+                console.log(today);
+                var day=date_ob.getDay();
+                console.log(day)
+                if(day==7){
+                    day='Sunday'
+                }
+                else if(day==1){
+                    day='Monday'
+                }
+                else if(day==2){
+                    day='Tuesday'
+                }
+                else if(day==3){
+                    day='Wednesday'
+                }
+                else if(day==4){
+                    day='Thrusday'
+                }
+                else if(day==5){
+                    day='Friday'
+                }
+                else if(day==6){
+                    day='Saturday'
+                }
+                timetable.findOne({'Year':y,'Division':d,'Batch':b, 'Day':day},
                 (err,res)=>{
                     if (!res)
                         console.log("if");
                     else
                     {
                         var date_ob = new Date();
-                        // date_ob=date_ob.toISOString()
-                        console.log(date_ob.toISOString());
-                        var today=date_ob.getDate();
-                        console.log(today);
-                        var day=date_ob.getDay();
-                        console.log(day)
-                        if(day==7){
-                            day='Sunday'
-                        }
-                        else if(day==1){
-                            day='Monday'
-                        }
-                        else if(day==2){
-                            day='Tuesday'
-                        }
-                        else if(day==3){
-                            day='Wednesday'
-                        }
-                        else if(day==4){
-                            day='Thrusday'
-                        }
-                        else if(day==5){
-                            day='Friday'
-                        }
-                        else if(day==6){
-                            day='Saturday'
-                        }
-                        if(res['Day']==day){
-                        // current hours
+                        // // date_ob=date_ob.toISOString()
+                        // console.log(date_ob.toISOString());
+                        // var today=date_ob.getDate();
+                        // today+=date_ob.getMonth();
+                        // today+=date_ob.getFullYear();
+                        // console.log(today);
+                        // var day=date_ob.getDay();
+                        // console.log(day)
+                        // if(day==7){
+                        //     day='Sunday'
+                        // }
+                        // else if(day==1){
+                        //     day='Monday'
+                        // }
+                        // else if(day==2){
+                        //     day='Tuesday'
+                        // }
+                        // else if(day==3){
+                        //     day='Wednesday'
+                        // }
+                        // else if(day==4){
+                        //     day='Thrusday'
+                        // }
+                        // else if(day==5){
+                        //     day='Friday'
+                        // }
+                        // else if(day==6){
+                        //     day='Saturday'
+                        // }
+                        // if(res['Day']==day){
+                        // // current hours
                         var hours = date_ob.getHours();
                         console.log(hours);
                         // if (hours>12)
@@ -225,22 +258,22 @@ function attended(user){
                         var time =res['Time'];
                         //entry time 
                         var time1=time[0];
-                        var time1e=time1.split('.').map(Number);
-                        // console.log(time1e);
+                        var time1e=time1.split(':').map(Number);
+                        console.log(time1e);
                         time1h=time1e[0];
                         time1m=time1e[1];
                         if (time1h>=1 && time1h<=6)
                         time1h+=12;
-                        ent=(time1h*60)+time1m;
-                        // console.log(time1h,time1m);
+                        var ent=(time1h*60)+time1m;
+                        console.log(ent,time1h,time1m);
                         //exit time
                         var time2=time[1];
-                        var time2e=time2.split('.').map(Number);
+                        var time2e=time2.split(':').map(Number);
                         time2h=time2e[0];
                         time2m=time2e[1];
                         if (time2h>=1 && time2h<=6)
                         time2h+=12;
-                        ext=(time2h*60)+time2m;
+                        var ext=(time2h*60)+time2m;
                         //calculation
                         if (curr>=ent && curr<=ext)
                             {
@@ -264,12 +297,11 @@ function attended(user){
                                 res['Subject_Name']=0;
                             }
                         console.log(ent,ext,'  ',curr,hours,minutes);
-                        console.log(res);
-                        }
-                        else{
-                            console.log('absent',day,res['Day']);
-                            res['Subject_Name']=0;
-                        }
+                        // console.log(res);
+                        // else{
+                        //     console.log('absent',day,res['Day']);
+                        //     res['Subject_Name']=0;
+                        // }
                         // lect=res['Subject_Name'];
                         // console.log("in time fun",lect);
                         resolve(res);
@@ -293,6 +325,22 @@ function allsubjects(y,s)
     });
 });
 }
+
+module.exports.getgrade=(req,res,next) =>{
+    var sid=req.body.data['student_id'];
+    var sub=req.body.data['Subject_Name'];
+    var exp=req.body.data['Exp_Name'];
+    // console.log(sid,sub)
+    grade.find({'Subject_Name':sub,'student_id':sid,'Exp_Name':exp},(err,g)=>{
+        if(!g)
+        console.log('not found grade')
+        else{
+            // console.log(atd)
+        return res.status(200).json({status:true,grade:g})
+        }
+    })
+}
+
 
 module.exports.findexp=(req,res,next) =>{
     sub=req.query.Subject_Name;
@@ -337,11 +385,18 @@ module.exports.findstudents=(req,res,next) =>{
     }
     else
     {
+        b = parseInt(b, 10);
+        console.log(y);
+        console.log(typeof d);
+        console.log(typeof b);
     student.find({'Year':y,'Division':d,'Batch':b},(err,stu)=>{
         if(!stu)
         console.log('not found students')
         else{
+            console.log(stu);
+            console.log("hello bro");
             return res.status(200).json({ status: true, students : stu });
+            // console.log("hello bro");
         }
     })
     }
@@ -470,7 +525,26 @@ module.exports.teacherProfile = (req, res, next) =>{
             if (!user)
                 return res.status(404).json({ status: false, message: 'User record not found.' });
             else
-                return res.status(200).json({ status: true, user : _.pick(user,['teacher_id','Year','Batch','Role']) });
+                return res.status(200).json({ status: true, user : user });
         }
     );
+}
+
+module.exports.exp = (req, res, next) => {
+    console.log(req.body)
+    var e=new experiment();
+    e.Question=req.body.data['Question'];
+    e.Exp_Name=req.body.data['Exp_Name'];
+    e.Subject_Name=req.body.data['Subject_Name'];
+    e.save((err, doc) => {
+        if (!err)
+            res.send(doc);
+        else {
+            if (err.code == 11000)
+                res.status(422).send(['Duplicate email adrress found.']);
+            else
+                return next(err);
+        }
+
+    });
 }

@@ -16,6 +16,9 @@ declare var require: any
 })
 export class PracticalInchargeComponent implements OnInit {
   students;
+  sub
+  qn=0
+  q=[];
   batches=[];
   teacher=this.userService.getData('role');
   flag=0
@@ -44,6 +47,7 @@ upload() {
         .subscribe((response) => {
             console.log('response received is ', response);
         })
+    alert("Expermiment uploaded");
 }
 
 getbatch(data){
@@ -63,6 +67,7 @@ selectbatch(batch){
   var batch=batch.target.value
   var temp=[]
   temp=batch.split(' ')
+  this.sub=temp[3]
   this.userService.setData('subject',temp[3])
   var data={'Year':temp[0],'Division':temp[1],'Batch':temp[2]}
   this.getstudents(data)
@@ -102,6 +107,32 @@ slide(){
       return
       }
     // });
+  }
+
+  inc(){
+    this.qn+=1
+    $('#question').append("<input id="+this.qn+" placeholder='question'>")
+  }
+
+  uploadexp(){
+    console.log($('#Exp_Name').val())
+    var e=$('#Exp_Name').val();
+    var s=$('#Subject_Name').val();
+    for(var i=1;i<=this.qn;i++)
+    {
+      // console.log($('#'+i).val())
+      this.q.push($('#'+i).val())
+    }
+    var data={'Exp_Name':e,'Subject_Name':s,'Question':this.q}
+    this.userService.setexperiment(data).subscribe(
+      res=>{
+        console.log(res)
+      },
+      err=>{
+        console.log(err)
+      }
+    )
+    alert("Experiment questions uploaded");
   }
 
 }

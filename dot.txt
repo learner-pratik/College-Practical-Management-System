@@ -1,0 +1,30 @@
+var date_ob = new Date();
+                        // date_ob=date_ob.toISOString()
+                        console.log(date_ob.toISOString());
+                        var today=date_ob.getDate();
+                        today+=date_ob.getMonth();
+                        today+=date_ob.getFullYear();
+                        console.log(today);
+                        var day=date_ob.getDay();
+                        console.log(day)
+                        if(day==7){
+                            day='Sunday'
+                        }
+                        else if(day==1){
+                            day='Monday'
+                        }
+                        else if(day==2){
+                            day='Tuesday'
+                        }
+                        else if(day==3){
+                            day='Wednesday'
+                        }
+                        else if(day==4){
+                            day='Thrusday'
+                        }
+                        else if(day==5){
+                            day='Friday'
+                        }
+                        else if(day==6){
+                            day='Saturday'
+                        }

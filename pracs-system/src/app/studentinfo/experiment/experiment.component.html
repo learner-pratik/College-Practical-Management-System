@@ -1,24 +1,20 @@
 <div class="container work-details">
-    <div class="container">
+    <div class="container subs">
         <button type="button" class="btn btn-lg btn-primary"
         *ngFor="let i of sublist" (click)="selectsub(i)">
             {{i}}
         </button>
     </div>
-    <div class="container">
+    <div class="container exps">
         <button type="button" class="btn btn-lg btn-primary" 
         *ngFor="let i of exp;index as j" (click)="selectexp(j)">
             {{i['Exp_Name']}}
         </button>
     </div>
-    <div class="container" *ngIf="output!=-101">
-        <div>{{output}}</div>
-        <div class="container" *ngFor="let i of experiment;index as j">
-            Question:
-            {{i}}
-            <br>
-            Answer:
-            {{outputquestion[j]}}
+    <div class="container output" *ngIf="output!=-101">
+        <div class="container">
+            <h3>Output:</h3>
+            <h4>{{output}}</h4>
         </div>
         <div class="table">
             <thead>
@@ -34,15 +30,19 @@
                 </tr>
             </tbody>
         </div>
-        <div class="container" *ngIf="outputquestion.length!=0">Grading
-            <br>
-            <select (change)='selectgrade($event)'>
-                <option>None</option>
+        <div class="container grades" *ngIf='role!="student"'>
+            <h4>Grading</h4>
+            <select id='grade'>
+                <option disabled selected value="">None</option>
                 <option value="A+">A+</option>
                 <option value="A">A</option>
                 <option value="B+">B+</option>
                 <option value="B">B</option>
             </select>
+            <button class="btn btn-lg" (click)='assign()'>Assign</button>
+        </div>
+        <div *ngIf='role=="student"'>
+            Grade:{{exp_grade}}
         </div>
     </div>
 </div>

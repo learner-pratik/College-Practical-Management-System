@@ -1,26 +1,27 @@
 <div class="container work-details">
-    <div>
+    <div class="container subs">
         <button type="button" class="btn btn-lg btn-primary" 
         *ngFor="let i of sublist" (click)="selectsub(i)">
             {{i}}
         </button>
     </div>
-    <div class="table">
-        <thead>
-            <tr>
-                <th>Sr.No</th>
-                <th>Day</th>
-                <th>Date</th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let i of attendance">
-                <td>{{i}}</td>
-                <td>{{i['Day']}}</td>
-                <td>{{i['Date']}}</td>
-                <td>Time</td>
-            </tr>
-        </tbody>
+    <div class="conatiner output">
+        <div class="table">
+            <thead>
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Day</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of attendance;index as j">
+                    <td>{{j+1}}</td>
+                    <td>{{i['Day']}}</td>
+                    <td>{{i['Date']}}</td>
+                </tr>
+            </tbody>
+        </div>
     </div>
+    
 </div>

@@ -35,7 +35,6 @@
 <div class="container-fullwidth main-page">
     <nav class="navbar navbar-expand-sm">
         <a class="navbar-brand" href="#">DMCE</a>
-        <a class="navbar-brand" href="#">{{userDetails.student_id}}</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,13 +46,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" (click)='info()' [routerLink]="['/studentinfo/']">Info</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="#">Action 1</a>
-                        <a class="dropdown-item" href="#">Action 2</a>
-                    </div>
                 </li>
             </ul>
             <button class="btn my-2 my-sm-0" type="button" (click)="onLogout()">Logout</button>
@@ -68,13 +60,11 @@
                 <div class="container details">
                     <h3>id - {{userDetails.student_id}}</h3>
                     <h3>Name-{{userDetails.Name}}</h3>
-                    <h3>Address - Kalwa</h3>
                     <h3>Year - {{userDetails.Year}}</h3>
                     <h3>Division - {{userDetails.Division}}</h3>
                     <h3>Batch - {{userDetails.Batch}}</h3>
                     <h3>Roll No - {{userDetails.Roll_no}}</h3>
                     <h3>Email - {{userDetails.email}}</h3>
-                    <h3>Previous Login</h3>
                 </div>
             </div>
             <div class="col-md-5">
@@ -83,9 +73,9 @@
                         <option disabled selected value="">Select Subject</option>
                         <option *ngFor='let i of subject' value={{i}} >{{i}}</option>
                     </select>
-                    <p *ngIf='subject.length==1'> {{ subject[0] }} </p>
+                    <h4 class="subs" *ngIf='subject.length==1'>Subject - {{ subject[0] }} </h4>
                 </div>
-                <form action="">
+                <form #codeoutput="ngForm" (ngSubmit)="codesubmit(codeoutput)">
                     <div class="form-group">
                         <select class="form-control" name="language" #language="ngModel" [(ngModel)]="model.language" id='lang'>
                             <option disabled selected value="">Select Language</option>
@@ -93,29 +83,29 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Code</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" style="background-color: #15162e; color: aliceblue;"></textarea>
+                        <label for="code">Code</label>
+                        <textarea class="form-control" id="code" rows="6" style="background-color: #15162e; color: aliceblue;"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Input</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="background-color: #15162e; color: aliceblue;"></textarea>
+                        <label for="input">Input</label>
+                        <textarea class="form-control" id="input" rows="4" style="background-color: #15162e; color: aliceblue;"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Output</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="background-color: #15162e; color: aliceblue;"></textarea>
+                        <label for="output">Output</label>
+                        <textarea class="form-control" id="output" rows="4" style="background-color: #15162e; color: aliceblue;"></textarea>
                     </div>
                     <input type="submit" value="Run" class="btn btn-primary">
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Error</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="background-color: #15162e; color: aliceblue;"></textarea>
+                        <label for="error">Error</label>
+                        <textarea class="form-control" id="error" rows="3" style="background-color: #15162e; color: aliceblue;"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Message</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="background-color: #15162e; color: aliceblue;"></textarea>
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" rows="3" style="background-color: #15162e; color: aliceblue;"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="background-color: #15162e; color: aliceblue;"></textarea>
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" rows="3" style="background-color: #15162e; color: aliceblue;"></textarea>
                     </div>
                 </form>
                 <div class="container questions">

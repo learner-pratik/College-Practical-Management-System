@@ -1,19 +1,27 @@
 <div class="jumbotron text-center">
     <h1 class="display-3">Upload Professors Details</h1>
 </div>
-<div class="container">
+<div class="container file">
     <div class="custom-file">
         <input name="file" (change)="fileChange($event)"  type="file"  >
     </div>
-    <button class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</button>
+    <button class="btn btn-lg input-group-text upload"  (click)="upload()"  id="btnUpload">
+        Upload
+    </button>
 </div>
-<div class="container">
-    <input id='teacher_id' placeholder="teacher_id">
-    <input id='Role' placeholder="Role">
-    <input id='Subject_Name' placeholder="Subject_Name">
-    <input id='Batch' placeholder="Batch">
-    <input id='Year' placeholder="Year">
-    <input id='Division' placeholder="Division">
+<div class="container role-input">
+    <input type="text" id='teacher_id' placeholder="teacher_id">
+    <br>
+    <input type="text" id='Role' placeholder="Role">
+    <br>
+    <input type="text" id='Subject_Name' placeholder="Subject_Name">
+    <br>
+    <input type="text" id='Batch' placeholder="Batch">
+    <br>
+    <input type="text" id='Year' placeholder="Year">
+    <br>
+    <input type="text" id='Division' placeholder="Division">
+    <br>
     <button class="btn btn-lg btn-dark" (click)='submit()'>Submit</button>
 </div>
 
